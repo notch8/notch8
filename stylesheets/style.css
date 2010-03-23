@@ -1,6 +1,6 @@
 body {
   background-color: #FF4800;
-	font-family: Verdana, Helvetica, "Lucida Grande", Arial, sans-serif;
+	font-family: "Helvetica Neue Medium", "Helvetica Neue", Helvetica, "Lucida Grande", Arial, sans-serif;
 }
 
 div.white_box {
@@ -14,8 +14,7 @@ div.white_box {
 }
 
 #slogan {
-	font-weight: normal;
-	margin-top: 8px;
+	margin-top: 2px;
 	width: 200px;
 }
 
@@ -25,6 +24,9 @@ div.header h3 {
 }
 
 div.header {
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	height: 4em;
 	clear: both;
 }
 
@@ -38,7 +40,7 @@ a {
 }
 
 a:hover {
-	text-decoration: underline;
+	color: darkgrey;
 }
 
 h1 a {

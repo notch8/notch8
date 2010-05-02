@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-  <title>Notch8 - Index </title>
+  <title>Notch8 - {{ page.title }} </title>
   <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" media="all" title="no title" charset="utf-8">
 </head>
 <body id="index">
@@ -26,9 +26,25 @@
       <h3><a href='/contact.html'>Contact</a></h3>
     </div>
     <div class="container">
-      <h1>This site is being redesigned and redeployed, it will be back soon. In the mean time, feel free to contact <a href="mailto:rob@notch8">Rob</a> for more info.</h1>
-
+      <h2><a href="{{ post.url }}">{{ page.title }}</a></h2>
+      {{ content }}
     </div>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_url = "http://notch8.com/{{ page.url }}";
+      var disqus_title ="{{ page.title }}";
+      var disqus_identifier = "{{ page.url }}";
+      var disqus_developer = 1;
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://notch8.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=notch8">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    
     
   </div>
   <div class="white_box">

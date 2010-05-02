@@ -47,6 +47,13 @@ h1 a {
 	text-decoration: underline;
 }
 
+.post_links {
+	margin: 20px;
+	width: 300px;
+	float: left;
+	list-style: none inside url();
+}
+
 .text-center {
 	text-align: center;
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Notch8 - Counting Retweets - Or Why Is This Hard </title>
+  <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" media="all" title="no title" charset="utf-8">
+</head>
+<body id="index">
+  <div class="white_box">
+    <div class='left'>
+      <a href='/'>
+        <img src="/images/logo_notch8_small.gif">
+      </a>
+    </div>
+    <div class='right'>
+      <h2 id='slogan'>Full Throttle Ruby and Rails Development</h2>
+    </div>
+    <div class="header">
+      <h3><a href='/'>Home</a></h3>
+      <h3><a href='/blog.html'>Blog</a></h3>
+      <!-- <h3><a href='#'>Portfolio</a></h3> -->
+      <!-- <h3><a href='#'>Services</a></h3> -->
+      <!-- <h3><a href='#'>Projects</a></h3> -->
+      <h3><a href='/speaking.html'>Speaking</a></h3>
+      <!-- <h3><a href='/about.html'>About</a></h3> -->
+      <h3><a href='/contact.html'>Contact</a></h3>
+    </div>
+    <div class="container">
+      <h2><a href="">Counting Retweets - Or Why Is This Hard</a></h2>
+      <p>On <a href='http://measuredvoice.com'>Measured Voice</a> we try and count the retweets for a given tweet. The first part that makes that hard is defining what a retweet really is. Is it Twitters new offical retweets? Any tweet that contains the exact same text? The same link? Some part of the same text? Then you get into RT, via and other attributions. It gets pretty confusing pretty fast.</p>
+
+<p>What we decided for <a href='http://measuredvoice.com'>MV</a> was that we need to keep track both offical retweets and the more traditional retweets. We&#8217;d ultimately like to keep track of them separately, but at the moment the Twitter API makes that tough to do. So for the moment we&#8217;re just keeping one retweet count using this algorithm:</p>
+
+<ul>
+<li>Search for the user name of the Twitter account</li>
+
+<li>Go through each result and check if we&#8217;ve seen it before</li>
+
+<li>If we haven&#8217;t seen it find the message it matches and increment the retweet counter</li>
+</ul>
+
+<p>In theory that should work fine&#8230; but it doesn&#8217;t. When you do a search for a user name the Twitter API just flat does not return all the results. Lets say we have the following tweet: &#8220;There are 19 million new sexually transmitted infections each year. Most have no symptoms. Get yourself tested: http://j.mp/9ikwGM&#8221;. We&#8217;d search for USAgov (note that page 1 of this search had no matches):</p>
+
+<p><img src='/images/usagov-twitter-2.png' alt='Search Page 2' /></p>
+
+<p>Here is what we get if we search for the link from that message:</p>
+
+<p><img src='/images/twitter-link-search.png' alt='Link Search' /></p>
+
+<p>So the first page shows 6 messages that we would count (the two in green don&#8217;t have the same link, so we&#8217;d miss them). But when we search for the link it self we see the 6 from the first result set and 4 that we don&#8217;t. Those 4 in yellow NEVER show up in the USAgov search. Where did they go?</p>
+
+<p>In fact, when we survey the various services this is what we find:</p>
+
+<p>Gina&#8217;s Method: 5 MV method: 6 Twitter mentions count: 6 Twitter URL search: 10 Twitter Username search: 6 OtterAPI: 10 (but a different 10!) Retweet.net: 0 TweetMeme: 12 (counts original url)</p>
+
+<p>Why is this so hard? Why can&#8217;t I go &#8220;http://api.twitter.com/1/statuses/id/retweet_count&#8221; and just get the number. Twitter makes it pretty clear that they have a hard time keeping up with API demand, so why are they asking me to pull each and every result over and over and manually count them. There are messages on the Google Group as far back as 2008 saying they are working on this, but I&#8217;m curious how others are solving this problem. Am I missing something obvious?</p>
+    </div>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_url = "http://notch8.com//2010/05/01/twitter-search.html";
+      var disqus_title ="Counting Retweets - Or Why Is This Hard";
+      var disqus_identifier = "/2010/05/01/twitter-search.html";
+      var disqus_developer = 1;
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://notch8.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=notch8">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+    
+  </div>
+  <div class="white_box">
+    copyright © 2010 Rob Kaufman and licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">creative commons attribution-share alike license</a>
+  </div>
+</body>

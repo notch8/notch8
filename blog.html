@@ -1,0 +1,21 @@
+---
+layout: main
+title: Blog
+---
+{% for post in site.posts limit:5 %}
+  <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+  {{ post.excerpt }}
+  <em>Posted on {{ post.date | date_to_long_string }}.</em>
+{% endfor %}
+
+<br />
+<br />
+
+<ul>
+  {% for post in site.posts offset:5 %}
+  <li class="post_links">
+    <a href="{{ post.url }}">{{ post.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+<br style='clear:both' />

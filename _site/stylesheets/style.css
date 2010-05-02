@@ -89,3 +89,12 @@ img.center {
   margin-left: auto;
   margin-right: auto
 }
+
+.column {
+	width: 400px;
+}
+
+#slideshow{
+	height: 300px;
+	width: 800px;
+}

@@ -3,6 +3,10 @@ body {
 	font-family: "Helvetica Neue Medium", "Helvetica Neue", Helvetica, "Lucida Grande", Arial, sans-serif;
 }
 
+div.services h2 {
+	line-height: 20px;
+}
+
 div.white_box {
   background-color:#FFFFFF;
   margin:20px auto;
@@ -97,4 +101,9 @@ img.center {
 #slideshow{
 	height: 300px;
 	width: 800px;
+}
+
+.portfolio img{
+	display:inline;
+	margin: 5px;
 }

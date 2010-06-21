@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Notch8 - Counting Retweets - Or Why Is This Hard </title>
+  <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" media="all" title="no title" charset="utf-8">
+  <link rel="alternate" type="application/atom+xml" href="/articles.atom" title="Feed for Notch8">
+</head>
+<body id="index">
+  <div class="white_box">
+    <div class='left'>
+      <a href='/'>
+        <img src="/images/logo_notch8_small.gif">
+      </a>
+    </div>
+    <div class='right'>
+      <h2 id='slogan'>Full Throttle Ruby and Rails Development</h2>
+    </div>
+    <div class="header">
+      <h3><a href='/'>Home</a></h3>
+      <h3><a href='/blog.html'>Blog</a></h3>
+      <!-- <h3><a href='#'>Portfolio</a></h3> -->
+      <!-- <h3><a href='#'>Services</a></h3> -->
+      <!-- <h3><a href='#'>Projects</a></h3> -->
+      <h3><a href='/speaking.html'>Speaking</a></h3>
+      <!-- <h3><a href='/about.html'>About</a></h3> -->
+      <h3><a href='/contact.html'>Contact</a></h3>
+    </div>
+    <div class="container">
+      <h2><a href="">Counting Retweets - Or Why Is This Hard</a></h2>
+      <body>
+	<p>
+		Counting Retweets - Or Why Is This Hard 		
+	</p>
+	<p>One of the primary goals of Measured Voice is to provide excellent statistics on each tweet sent by our users, including an accurate count of retweets. Counting retweets is a supremely difficult challenge. Here's why…</p>
+	<p>The first challenge to counting retweets is defining what a retweet really is. Is it Twitter's official retweet? Is it any tweet that contains the exact same text as the original tweet? Or should it include the same link or only some part of the text? Do retweets need to include RT @username or /via @username or other attributions? It gets pretty confusing pretty fast.</p>
+		
+	<p>Our plan for Measured Voice is to track both "official" and "traditional" retweets. We'd ultimately like to keep track of them separately, but limitations of Twitter's API make that impossible for now. For a long time, we'd been counting retweets using this algorithm:</p> 
+	<ol>
+		<li>Search for the username of the Twitter account whose retweets we're trying to count (we'll just call this "the account" from here on)</li>
+		<li>Go through each result and check if we've seen it before</li>
+		<li>If we haven't seen it before, we check to see if it contains a matching short URL or the first six words of a message sent from the account</li>
+		<li>If it matches, we increment the retweet count</li>
+		
+	</ol>
+		
+	<p>We liked this approach because it&mdash;in theory&mdash;allowed us to count a lot of retweets from a lot of messages by performing only one simple search query for the username, saving us from expending API calls to count retweets by searching for short URLs for text from each individual message.</p>  
+	<p>So yeah, in theory this should work fine, but it doesn't because Twitter search is a slippery beast. We've learned that when you search for a username, the results do not include all mentions of that username. We know that Twitter search only goes back about 7 days, but we're saying that the search results appear to randomly omit mentions of the username within that 7-day window.</p>
+			
+	<p>For example, take the following tweet:</p> 
+  <style type="text/css">.bbpBox{background:#003366;padding:20px;}p.bbpTweet{background:#fff;padding:10px 12px 10px 12px;margin:0;min-height:48px;color:#000;font-size:18px !important;line-height:22px;-moz-border-radius:5px;-webkit-border-radius:5px}p.bbpTweet span.metadata{display:block;width:100%;clear:both;margin-top:8px;padding-top:12px;height:40px;border-top:1px solid #fff;border-top:1px solid #e6e6e6}p.bbpTweet span.metadata span.author{line-height:19px}p.bbpTweet span.metadata span.author img{float:left;margin:0 7px 0 0px;width:38px;height:38px}p.bbpTweet a:hover{text-decoration:underline}p.bbpTweet span.timestamp{font-size:12px;display:block}</style> <div class="bbpBox"><p class="bbpTweet">There are 19 million new sexually transmitted infections each year. Most have no symptoms. Get yourself tested: <a rel="nofollow" href="http://j.mp/9ikwGM">http://j.mp/9ikwGM</a><span class="timestamp"><a href="http://twitter.com/USAgov/status/11768661767" title="Wed Apr 07 18:02:44 +0000 2010">11:02 AM Apr 7th</a> via <a rel="nofollow" href="http://measuredvoice.com/">Measured Voice</a></span><span class="metadata"><span class="author"><a href="http://twitter.com/USAgov"><img src="http://a1.twimg.com/profile_images/52561878/usa_twitter_normal.gif"></a><strong><a href="http://twitter.com/USAgov">USA.gov</a></strong><br>USAgov</span></span></p></div> <!-- end of tweet -->
+
+	<p>Using the method described above, we'd <a title="@usagov - Twitter Search" href="http://search.twitter.com/search?q=@usagov">search twitter for @USAgov</a> and look for instances of <a title="StopFraud.gov - Financial Fraud Enforcement Task Force" href="http://go.usa.gov/iUU">http://j.mp/9ikwGM</a> within the results.</p> Here is what we'd get: 
+
+  <a href="/images/twitter-recounting-step-1-large.png"><img src="/images/twitter-recounting-step-1-400.png"></a>
+  <br><span style="font-size: 80%;">Click to see fullsize</span>
+
+  <p>We get 6 messages that we would count (the two in red use a different link than the original, so we'd miss them). However, if we search for the link itself, we get this:</p>
+
+  	<a href="/images/twitter-recounting-step-2-large.png"><img src="/images/twitter-recounting-step-2-400.png"></a>
+  	<br><span style="font-size: 80%;">Click to see fullsize</span>
+
+  <p>	Here we see the 6 results from the first query and 4 more! Those 4 in yellow <strong>never</strong> show up in the @USAgov search. Where did they go? No one knows.</p>
+
+  <p>
+  In fact, when we survey the various services that track retweets, this is what we find when looking for retweets of the above tweet: </p>
+  <ul>
+  	<li>Gina Trapani's <a title="ThinkTank - Ask your friends" href="http://thinktankapp.com/">Think Tank</a>: 5</li> 
+  	<li>Old Measured Voice username search method: 6</li>
+  	<li>New Measured Voice URL search method: 10</li>
+  	<li>OtterAPI: 10 (but a different 10!)</li>
+  	<li>Retweet.net: 0</li>
+  	<li>TweetMeme: 12 (counts original tweet)</li> 
+	
+    <p>Why is this so hard? Why can't we go "http://api.twitter.com/1/statuses/id/retweet_count" and just get the number? Twitter makes it pretty clear that they have a hard time keeping up with API demand, so why are they asking us to pull each and every result over and over and manually count them? There are messages on the Google Group as far back as 2008 saying they are working on this, but we're curious how others are solving this problem.</p> 
+	
+    <p>
+      Are we missing something obvious?
+    </p>
+  </ul>
+</body>
+    </div>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_url = "http://notch8.com//2010/06/21/twitter-search.html";
+      var disqus_title ="Counting Retweets - Or Why Is This Hard";
+      var disqus_identifier = "/2010/06/21/twitter-search.html";
+      var disqus_developer = 1;
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://notch8.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=notch8">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+    
+  </div>
+  <div class="white_box">
+    copyright © 2010 Notch8 and licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">creative commons attribution-share alike license</a>
+  </div>
+</body>

@@ -3,6 +3,14 @@ body {
 	font-family: "Helvetica Neue Medium", "Helvetica Neue", Helvetica, "Lucida Grande", Arial, sans-serif;
 }
 
+pre {
+  padding: 20px;
+  background-color: black;
+  color: white;
+  width: 760px;
+  overflow: auto;
+}
+
 div.services h2 {
 	line-height: 20px;
 }

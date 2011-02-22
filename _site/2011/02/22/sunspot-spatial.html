@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Notch8 - Adding Solr-Spatial-Light back to Sunspot </title>
+  <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" media="all" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="/stylesheets/native.css" type="text/css" media="all" title="no title" charset="utf-8">
+  <link rel="alternate" type="application/atom+xml" href="/articles.atom" title="Feed for Notch8">
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8635145-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+<body id="index">
+  <div class="white_box">
+    <div class='left'>
+      <a href='/'>
+        <img src="/images/logo_notch8_small.gif">
+      </a>
+    </div>
+    <div class='right'>
+      <h2 id='slogan'>Full Throttle Ruby and Rails Development</h2>
+    </div>
+    <div class="header">
+      <h3><a href='/'>Home</a></h3>
+      <h3><a href='/blog.html'>Blog</a></h3>
+      <h3><a href='/portfolio.html'>Portfolio</a></h3>
+      <h3><a href='/services.html'>Services</a></h3>
+      <!-- <h3><a href='#'>Projects</a></h3> -->
+      <h3><a href='/speaking.html'>Speaking</a></h3>
+      <!-- <h3><a href='/about.html'>About</a></h3> -->
+      <h3><a href='/contact.html'>Contact</a></h3>
+    </div>
+    <div class="container">
+      <h2><a href="">Adding Solr-Spatial-Light back to Sunspot</a></h2>
+      <p>Geohashing is super cool, but it doesn&#8217;t allow you to sort by distance (yet) and there are still some major issues when it comes to accuracy. Solr-spatial-light gives you accuracy and sortability, but it is more difficult to scale. To me (and my clients) &#8220;works but takes more hardware&#8221; trumps &#8220;doesn&#8217;t work but effecient&#8221;. Word on the street is that the next release of Sunspot will once again support solr-spatial-light and that support will stay in until Geohashing becomes feature complete. In the meantime here are the steps to getting solr-spatial-light working with Sunspot 1.2</p>
+
+<p>In your searchable block add:</p>
+<div class='highlight'><pre><code class='ruby'><span class='n'>float</span> <span class='ss'>:lat</span><span class='p'>,</span> <span class='ss'>:as</span> <span class='o'>=&gt;</span> <span class='s1'>&#39;lat&#39;</span>
+<span class='n'>float</span> <span class='ss'>:lng</span><span class='p'>,</span> <span class='ss'>:as</span> <span class='o'>=&gt;</span> <span class='s1'>&#39;lng&#39;</span>
+</code></pre>
+</div>
+<p>These should be the latitude and longitude of your object. I&#8217;m using <a href='http://graticule.rubyforge.org/plugin.html'>acts_as_geocodable</a> to do my geocoding and storing the lat and lng as doubles in my db.</p>
+
+<p>In your search block you can filter using the adjust_solr_params method. I use a model to wrap my searches with a set of attr_accessors which get set by the form (that is where self.zipcode and self.with_in come from. The first is a postal code, the second is the radius number in miles.</p>
+<div class='highlight'><pre><code class='ruby'><span class='c1'># distance filters</span>
+<span class='k'>if</span> <span class='o'>!</span><span class='nb'>self</span><span class='o'>.</span><span class='n'>zip_code</span><span class='o'>.</span><span class='n'>blank?</span> <span class='o'>&amp;&amp;</span> <span class='o'>!</span><span class='nb'>self</span><span class='o'>.</span><span class='n'>with_in</span><span class='o'>.</span><span class='n'>blank?</span> <span class='o'>&amp;&amp;</span> <span class='n'>code</span> <span class='o'>=</span> <span class='no'>Geocode</span><span class='o'>.</span><span class='n'>geocoder</span><span class='o'>.</span><span class='n'>locate</span><span class='p'>(</span><span class='nb'>self</span><span class='o'>.</span><span class='n'>zip_code</span><span class='p'>)</span>
+  <span class='n'>adjust_solr_params</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>params</span><span class='o'>|</span>
+    <span class='n'>params</span><span class='o'>[</span><span class='ss'>:spatial</span><span class='o'>]</span> <span class='o'>=</span> <span class='s2'>&quot;{!radius=</span><span class='si'>#{</span><span class='nb'>self</span><span class='o'>.</span><span class='n'>with_in</span><span class='o'>.</span><span class='n'>to_i</span><span class='si'>}</span><span class='s2'>.0 sort=true}</span><span class='si'>#{</span><span class='n'>code</span><span class='o'>.</span><span class='n'>latitude</span><span class='o'>.</span><span class='n'>to_f</span><span class='si'>}</span><span class='s2'>,</span><span class='si'>#{</span><span class='n'>code</span><span class='o'>.</span><span class='n'>longitude</span><span class='o'>.</span><span class='n'>to_f</span><span class='si'>}</span><span class='s2'>&quot;</span>
+    <span class='c1'># spatial={!radius=10.0 sort=true}lat:40.0,lng:-70.0</span>
+  <span class='k'>end</span>
+<span class='k'>end</span>
+</code></pre>
+</div>
+<p>And that&#8217;s it. You now have solr-spatial-light support which is still supported by <a href='http://websolr.com'>WebSolr</a> and is running beautifully in my production environment.</p>
+    </div>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_url = "http://notch8.com//2011/02/22/sunspot-spatial.html";
+      var disqus_title ="Adding Solr-Spatial-Light back to Sunspot";
+      var disqus_identifier = "/2011/02/22/sunspot-spatial.html";
+      var disqus_developer = 1;
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://notch8.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=notch8">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+    
+  </div>
+  <div class="white_box">
+    copyright © 2010 Notch8 and licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">creative commons attribution-share alike license</a>
+  </div>
+</body>

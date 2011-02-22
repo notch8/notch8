@@ -1,6 +1,6 @@
 set :application, "notch8"
 set :repository,  "git@github.com:notch8/notch8.git"
-set :domain, "72.14.182.60"
+set :domain, "notch8.com"
 set :deploy_to, "/var/www/apps/#{application}"
 
 set :scm, :git

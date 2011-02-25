@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Notch8 - Services </title>
+  <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" media="all" title="no title" charset="utf-8">
+  <link rel="alternate" type="application/atom+xml" href="/articles.atom" title="Feed for Notch8">
+  <script src="http://cdn.jquerytools.org/1.2.3/jquery.tools.min.js"></script>
+  <script src="/javascripts/jquery.cycle.lite.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8635145-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+<body id="index">
+  <div class="white_box">
+    <div class='left'>
+      <a href='/'>
+        <img src="/images/logo_notch8_small.gif">
+      </a>
+    </div>
+    <div class='right'>
+      <h2 id='slogan'>Full Throttle Ruby and Rails Development</h2>
+    </div>
+    <div class="header">
+      <h3><a href='/'>Home</a></h3>
+      <h3><a href='/blog.html'>Blog</a></h3>
+      <h3><a href='/portfolio.html'>Portfolio</a></h3>
+      <h3><a href='/services.html'>Services</a></h3>
+      <!-- <h3><a href='#'>Projects</a></h3> -->
+      <h3><a href='/speaking.html'>Speaking</a></h3>
+      <!-- <h3><a href='/about.html'>About</a></h3> -->
+      <h3><a href='/contact.html'>Contact</a></h3>
+    </div>
+    <div class="container">
+      <h1 id='welcome_to_the_download_page_for_the_madrailers_newbie_night'>Welcome to the download page for the MadRailers &#8220;Newbie&#8221; night.</h1>
+
+<p>Here you&#8217;ll find a VMWare image to download and run in order to get everyone on the same page and up and running quickly.</p>
+
+<h2 id='download_vmware'>Download VMWare</h2>
+
+<p><a href='http://downloads.vmware.com/d/info/desktop_downloads/vmware_fusion_for_the_mac/3_0'>OS X</a></p>
+
+<p><a href='http://downloads.vmware.com/d/info/desktop_downloads/vmware_player/3_0'>Linux</a></p>
+
+<p><a href='http://downloads.vmware.com/d/info/desktop_downloads/vmware_player/3_0'>Windows</a></p>
+
+<h2 id='download_the_image'>Download the image</h2>
+
+<p><a href='https://s3.amazonaws.com/UbuntuImage/Ubuntu.zip'>Ubuntu.zip</a></p>
+
+<p>MD5 (Ubuntu.zip) = 5adfdbfac4240ef78c73273e6d9ad495</p>
+
+<p>Go do something else for a while&#8230; it a big file.</p>
+
+<h2 id='instuctions'>Instuctions</h2>
+
+<p>Open the VM and then log in with the password &#8220;letslearn&#8221;. Once the VM boots please open Terminal (its on the desktop). When you open the terminal it will ask for a new password and then ask for an SSH passphrase (leave that blank). Once that is done, do the following:</p>
+<div class='highlight'><pre><code class='bash'>    <span class='nv'>$ </span><span class='nb'>cd </span>work
+
+    <span class='nv'>$ </span>rails new tutor -d mysql -T -J -m 
+
+    <span class='nv'>$ </span><span class='nb'>cd </span>tutor
+
+    <span class='nv'>$ </span>rake db:create
+
+    <span class='nv'>$ </span>./script/rails g scaffold Page title:string body:text
+</code></pre>
+</div>
+<p>edit route file:</p>
+
+<p>uncomment root :to =&gt; &#8220;pages#index&#8221;</p>
+<div class='highlight'><pre><code class='bash'>    <span class='nv'>$ </span>rake db:migrate
+
+    <span class='nv'>$ </span>./script/rails s
+</code></pre>
+</div>
+    </div>
+    
+  </div>
+  <div class="white_box">
+    copyright © 2010 Notch8 and licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">creative commons attribution-share alike license</a>
+  </div>
+</body>

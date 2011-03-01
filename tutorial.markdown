@@ -30,7 +30,7 @@ open the terminal it will ask for a new password and then ask for an SSH passphr
 {% highlight bash %}
     $ cd work
 
-    $ rails new tutor -d mysql -T -J -m 
+    $ rails new tutor -d mysql -T -J -m rails3_template.rb
 
     $ cd tutor
 

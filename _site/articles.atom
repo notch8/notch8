@@ -4,7 +4,7 @@
  <title>Notch8</title>
  <link href="http://notch8.com/articles.atom" rel="self"/>
  <link href="http://notch8.com/"/>
- <updated>2011-03-01T11:44:38-06:00</updated>
+ <updated>2011-03-17T14:09:45-07:00</updated>
  <id>http://notch8.com/</id>
  <author>
    <name>Rob Kaufman</name>
@@ -15,7 +15,7 @@
  <entry>
    <title>Adding Solr-Spatial-Light back to Sunspot</title>
    <link href="http://notch8.com//2011/02/22/sunspot-spatial.html"/>
-   <updated>2011-02-22T00:00:00-06:00</updated>
+   <updated>2011-02-22T00:00:00-08:00</updated>
    <id>http://notch8.com//2011/02/22/sunspot-spatial</id>
    <content type="html">&lt;p&gt;Geohashing is super cool, but it doesn&amp;#8217;t allow you to sort by distance (yet) and there are still some major issues when it comes to accuracy. Solr-spatial-light gives you accuracy and sortability, but it is more difficult to scale. To me (and my clients) &amp;#8220;works but takes more hardware&amp;#8221; trumps &amp;#8220;doesn&amp;#8217;t work but effecient&amp;#8221;. Word on the street is that the next release of Sunspot will once again support solr-spatial-light and that support will stay in until Geohashing becomes feature complete. In the meantime here are the steps to getting solr-spatial-light working with Sunspot 1.2&lt;/p&gt;
 
@@ -42,7 +42,7 @@
  <entry>
    <title>Counting Retweets - Or Why Is This Hard</title>
    <link href="http://notch8.com//2010/06/21/twitter-search.html"/>
-   <updated>2010-06-21T00:00:00-05:00</updated>
+   <updated>2010-06-21T00:00:00-07:00</updated>
    <id>http://notch8.com//2010/06/21/twitter-search</id>
    <content type="html">&lt;body&gt;
 	&lt;p&gt;

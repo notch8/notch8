@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Notch8 - EC2pocolyps Wrapup </title>
+  <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" media="all" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="/stylesheets/native.css" type="text/css" media="all" title="no title" charset="utf-8">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="alternate" type="application/atom+xml" href="/articles.atom" title="Feed for Notch8">
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8635145-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+<body id="index">
+  <div class="white_box">
+    <div class='left'>
+      <a href='/'>
+        <img src="/images/logo_notch8_small.gif">
+      </a>
+    </div>
+    <div class='right'>
+      <h2 id='slogan'>Full Throttle Ruby and Rails Development</h2>
+    </div>
+    <div class="header">
+      <h3><a href='/'>Home</a></h3>
+      <h3><a href='/blog.html'>Blog</a></h3>
+      <h3><a href='/portfolio.html'>Portfolio</a></h3>
+      <h3><a href='/services.html'>Services</a></h3>
+      <!-- <h3><a href='#'>Projects</a></h3> -->
+      <h3><a href='/speaking.html'>Speaking</a></h3>
+      <!-- <h3><a href='/about.html'>About</a></h3> -->
+      <h3><a href='/contact.html'>Contact</a></h3>
+    </div>
+    <div class="container">
+      <h2><a href="">EC2pocolyps Wrapup</a></h2>
+      <h1 id='what_happened'>What happened</h1>
+
+<p>The long and short of it is that Amazon&#8217;s cloud services failed and failed massively. Heroku, which many of our customers use, is built on top of Amazon, as are WebSolr, Exceptional and MongoHQ. These services where all heavily hurt by this unprecedented outage. Amazon is claiming that this outage is not a breach of the SLA, but the bottom line is that the outage was massive and the response was feeble. We where told that servers would be back on line in minutes when things first went down, and that they where working on the problem and it would be fixed &#8220;soon&#8221; basically every hour there after. Heroku on the other hand handled the outage as best they could, updating status.heroku.com quickly and accurately while being clear what promises they were and were not making.</p>
+
+<h1 id='impact_on_notch8'>Impact on Notch8</h1>
+
+<p>First off, I&#8217;m very proud to say that none of Notch8&#8217;s high availability customers experienced down time because of this outage. High availability is a trade off. It is, after all, expensive to maintain 2 full sets of architecture by two separate providers and two separate locations. We work hard to make things rock solid, and even with this major outage we were able to weather the storm without having to frantically scramble about. An event of this scale did mean degraded performance for some, though once we disabled the Exceptional javascript load (thanks to Jed Sundwall for noticing that) the &#8220;backup&#8221; servers where able to handle the load we asked of them during the outage.</p>
+
+<p>For those not on a high availability maintenance plan, things were definitely rockier. In fact, they were unacceptably rockier. I want to define my quality expectations here and then talk about in what ways they were not met and what will happen going forward.</p>
+
+<h2 id='maintenance_customers'>Maintenance Customers:</h2>
+
+<p>Those who have Notch8 maintaining their code and servers but who do not need to pay the extra server and sys admin costs of high availability can expect occasional down time. We define occasional down time as a few minutes here and there and maybe an hour or two in the event of something major. It doesn&#8217;t mean down for two to three days. Yes, no data was lost even on servers whose EBS volumes did not come back at all. And yes, we were there to hold your hands and explain things as they happened. But it was still to long for me to be satisfied, and for that I apologize. We are going to be implementing smoother transitions to backup servers in the future which I&#8217;ll layout below.</p>
+
+<h2 id='develop_only_customers'>Develop Only Customers:</h2>
+
+<p>We are not abandoning you if you opt out of a maintenance plan. We take a lot of pride in our work and are choosy about working on things we can be passionate about. It does mean that an outage like this will rely on you telling us that your services are down and authorizing a spend if you need to fail over to a backup stack. For you, an event like this may mean being down for two or three days until the underlying servers can be restored and it means that if we&#8217;re scrambling with other customers that we can only put you in the queue and get to you as soon as possible. Not having a restoration plan in place will increase the time it costs when an incident happens. But we should always be able to move you over and get you back live. As I look at the land scape at the moment, were many of you only have the barest of backups so that I can sleep at night, I don&#8217;t feel like that is necessarily the case. It should be, and I&#8217;m sorry that I haven&#8217;t made that more clear.</p>
+
+<h1 id='what_is_going_to_change'>What is Going to Change</h1>
+
+<p>In order to meet the standards we&#8217;ve set we are going to be rolling out a few things:</p>
+
+<p>1) Better communication of site and service down time. We&#8217;re going to be implementing a new dashboard page were those of you on maintenance plans will be able to get aggregated data as to what is going on.</p>
+
+<p>2) Accelerated deployment from backups for maintenance customers. We didn&#8217;t start this soon enough and then hit some bumps in this work flow. We&#8217;ll be ironing those out and testing the transition from the primary servers to their backup counter parts.</p>
+
+<p>3) A free backup audit for all customers (regardless of maintenance plan). We&#8217;ll be putting together a document that shows your current stack, what is where and discussing your options in the even of a failure. This document will be pretty simple and hopefully really digestible. We&#8217;ll also be showing you pricing should you decide you want to change to a different plan.</p>
+
+<p>These things are going to take a little time to get in place, so please bare with us.</p>
+
+<h1 id='why_we_dont_think_we_should_move_stacks'>Why We Don&#8217;t Think We Should Move Stacks</h1>
+
+<p>Amazon and Heroku have both learned a ton from this outage. Heroku is for sure going to be making changes to address the gaps. It could happen to anyone and switching providers doesn&#8217;t really protect us much anyway. Heroku has responded <a href='http://status.heroku.com/incident/151'>here</a> by taking responsability and providing transparancy, which is exactly what I&#8217;d hope for from a provider. Not only do we not gain anything by moving off Heroku, they are a responsive company, and will be better equipped to to handle an outage of this magnitude because of this outage. The benefits of Heroku are clear&#8230; easy &#8220;right sizing&#8221; of servers and services. There is absolutely no easier way for us to deploy and scale your sites. I feel like with the addition of smoothing over our catastrophe response we can feel safe we&#8217;re getting the best risk / cost trade off that we can.</p>
+
+<h1 id='status_now'>Status Now</h1>
+
+<p>All services are up and running. We&#8217;ve verified everything we can think of, so if anything is found to be still down please let us know.</p>
+    </div>
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_url = "http://notch8.com//2011/04/26/ec2pocolyps-wrapup.html";
+      var disqus_title ="EC2pocolyps Wrapup";
+      var disqus_identifier = "/2011/04/26/ec2pocolyps-wrapup.html";
+      var disqus_developer = 1;
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://notch8.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=notch8">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+    
+  </div>
+  <div class="white_box">
+    copyright © 2010 Notch8 and licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">creative commons attribution-share alike license</a>
+  </div>
+</body>

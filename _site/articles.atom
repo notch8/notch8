@@ -4,13 +4,57 @@
  <title>Notch8</title>
  <link href="http://notch8.com/articles.atom" rel="self"/>
  <link href="http://notch8.com/"/>
- <updated>2011-03-17T14:09:45-07:00</updated>
+ <updated>2011-04-27T11:23:57-07:00</updated>
  <id>http://notch8.com/</id>
  <author>
    <name>Rob Kaufman</name>
    <email>rob@notch8.com</email>
  </author>
 
+ 
+ <entry>
+   <title>EC2pocolyps Wrapup</title>
+   <link href="http://notch8.com//2011/04/26/ec2pocolyps-wrapup.html"/>
+   <updated>2011-04-26T00:00:00-07:00</updated>
+   <id>http://notch8.com//2011/04/26/ec2pocolyps-wrapup</id>
+   <content type="html">&lt;h1 id='what_happened'&gt;What happened&lt;/h1&gt;
+
+&lt;p&gt;The long and short of it is that Amazon&amp;#8217;s cloud services failed and failed massively. Heroku, which many of our customers use, is built on top of Amazon, as are WebSolr, Exceptional and MongoHQ. These services where all heavily hurt by this unprecedented outage. Amazon is claiming that this outage is not a breach of the SLA, but the bottom line is that the outage was massive and the response was feeble. We where told that servers would be back on line in minutes when things first went down, and that they where working on the problem and it would be fixed &amp;#8220;soon&amp;#8221; basically every hour there after. Heroku on the other hand handled the outage as best they could, updating status.heroku.com quickly and accurately while being clear what promises they were and were not making.&lt;/p&gt;
+
+&lt;h1 id='impact_on_notch8'&gt;Impact on Notch8&lt;/h1&gt;
+
+&lt;p&gt;First off, I&amp;#8217;m very proud to say that none of Notch8&amp;#8217;s high availability customers experienced down time because of this outage. High availability is a trade off. It is, after all, expensive to maintain 2 full sets of architecture by two separate providers and two separate locations. We work hard to make things rock solid, and even with this major outage we were able to weather the storm without having to frantically scramble about. An event of this scale did mean degraded performance for some, though once we disabled the Exceptional javascript load (thanks to Jed Sundwall for noticing that) the &amp;#8220;backup&amp;#8221; servers where able to handle the load we asked of them during the outage.&lt;/p&gt;
+
+&lt;p&gt;For those not on a high availability maintenance plan, things were definitely rockier. In fact, they were unacceptably rockier. I want to define my quality expectations here and then talk about in what ways they were not met and what will happen going forward.&lt;/p&gt;
+
+&lt;h2 id='maintenance_customers'&gt;Maintenance Customers:&lt;/h2&gt;
+
+&lt;p&gt;Those who have Notch8 maintaining their code and servers but who do not need to pay the extra server and sys admin costs of high availability can expect occasional down time. We define occasional down time as a few minutes here and there and maybe an hour or two in the event of something major. It doesn&amp;#8217;t mean down for two to three days. Yes, no data was lost even on servers whose EBS volumes did not come back at all. And yes, we were there to hold your hands and explain things as they happened. But it was still to long for me to be satisfied, and for that I apologize. We are going to be implementing smoother transitions to backup servers in the future which I&amp;#8217;ll layout below.&lt;/p&gt;
+
+&lt;h2 id='develop_only_customers'&gt;Develop Only Customers:&lt;/h2&gt;
+
+&lt;p&gt;We are not abandoning you if you opt out of a maintenance plan. We take a lot of pride in our work and are choosy about working on things we can be passionate about. It does mean that an outage like this will rely on you telling us that your services are down and authorizing a spend if you need to fail over to a backup stack. For you, an event like this may mean being down for two or three days until the underlying servers can be restored and it means that if we&amp;#8217;re scrambling with other customers that we can only put you in the queue and get to you as soon as possible. Not having a restoration plan in place will increase the time it costs when an incident happens. But we should always be able to move you over and get you back live. As I look at the land scape at the moment, were many of you only have the barest of backups so that I can sleep at night, I don&amp;#8217;t feel like that is necessarily the case. It should be, and I&amp;#8217;m sorry that I haven&amp;#8217;t made that more clear.&lt;/p&gt;
+
+&lt;h1 id='what_is_going_to_change'&gt;What is Going to Change&lt;/h1&gt;
+
+&lt;p&gt;In order to meet the standards we&amp;#8217;ve set we are going to be rolling out a few things:&lt;/p&gt;
+
+&lt;p&gt;1) Better communication of site and service down time. We&amp;#8217;re going to be implementing a new dashboard page were those of you on maintenance plans will be able to get aggregated data as to what is going on.&lt;/p&gt;
+
+&lt;p&gt;2) Accelerated deployment from backups for maintenance customers. We didn&amp;#8217;t start this soon enough and then hit some bumps in this work flow. We&amp;#8217;ll be ironing those out and testing the transition from the primary servers to their backup counter parts.&lt;/p&gt;
+
+&lt;p&gt;3) A free backup audit for all customers (regardless of maintenance plan). We&amp;#8217;ll be putting together a document that shows your current stack, what is where and discussing your options in the even of a failure. This document will be pretty simple and hopefully really digestible. We&amp;#8217;ll also be showing you pricing should you decide you want to change to a different plan.&lt;/p&gt;
+
+&lt;p&gt;These things are going to take a little time to get in place, so please bare with us.&lt;/p&gt;
+
+&lt;h1 id='why_we_dont_think_we_should_move_stacks'&gt;Why We Don&amp;#8217;t Think We Should Move Stacks&lt;/h1&gt;
+
+&lt;p&gt;Amazon and Heroku have both learned a ton from this outage. Heroku is for sure going to be making changes to address the gaps. It could happen to anyone and switching providers doesn&amp;#8217;t really protect us much anyway. Heroku has responded &lt;a href='http://status.heroku.com/incident/151'&gt;here&lt;/a&gt; by taking responsability and providing transparancy, which is exactly what I&amp;#8217;d hope for from a provider. Not only do we not gain anything by moving off Heroku, they are a responsive company, and will be better equipped to to handle an outage of this magnitude because of this outage. The benefits of Heroku are clear&amp;#8230; easy &amp;#8220;right sizing&amp;#8221; of servers and services. There is absolutely no easier way for us to deploy and scale your sites. I feel like with the addition of smoothing over our catastrophe response we can feel safe we&amp;#8217;re getting the best risk / cost trade off that we can.&lt;/p&gt;
+
+&lt;h1 id='status_now'&gt;Status Now&lt;/h1&gt;
+
+&lt;p&gt;All services are up and running. We&amp;#8217;ve verified everything we can think of, so if anything is found to be still down please let us know.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Adding Solr-Spatial-Light back to Sunspot</title>

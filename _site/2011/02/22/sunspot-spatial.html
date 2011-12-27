@@ -45,24 +45,9 @@
       <h2><a href="">Adding Solr-Spatial-Light back to Sunspot</a></h2>
       <p>Geohashing is super cool, but it doesn&#8217;t allow you to sort by distance (yet) and there are still some major issues when it comes to accuracy. Solr-spatial-light gives you accuracy and sortability, but it is more difficult to scale. To me (and my clients) &#8220;works but takes more hardware&#8221; trumps &#8220;doesn&#8217;t work but effecient&#8221;. Word on the street is that the next release of Sunspot will once again support solr-spatial-light and that support will stay in until Geohashing becomes feature complete. In the meantime here are the steps to getting solr-spatial-light working with Sunspot 1.2</p>
 
-<p>In your searchable block add:</p>
-<div class='highlight'><pre><code class='ruby'><span class='n'>float</span> <span class='ss'>:lat</span><span class='p'>,</span> <span class='ss'>:as</span> <span class='o'>=&gt;</span> <span class='s1'>&#39;lat&#39;</span>
-<span class='n'>float</span> <span class='ss'>:lng</span><span class='p'>,</span> <span class='ss'>:as</span> <span class='o'>=&gt;</span> <span class='s1'>&#39;lng&#39;</span>
-</code></pre>
-</div>
-<p>These should be the latitude and longitude of your object. I&#8217;m using <a href='http://graticule.rubyforge.org/plugin.html'>acts_as_geocodable</a> to do my geocoding and storing the lat and lng as doubles in my db.</p>
+<p>In your searchable block add: Liquid error: No such file or directory - posix_spawnp These should be the latitude and longitude of your object. I&#8217;m using <a href='http://graticule.rubyforge.org/plugin.html'>acts_as_geocodable</a> to do my geocoding and storing the lat and lng as doubles in my db.</p>
 
-<p>In your search block you can filter using the adjust_solr_params method. I use a model to wrap my searches with a set of attr_accessors which get set by the form (that is where self.zipcode and self.with_in come from. The first is a postal code, the second is the radius number in miles.</p>
-<div class='highlight'><pre><code class='ruby'><span class='c1'># distance filters</span>
-<span class='k'>if</span> <span class='o'>!</span><span class='nb'>self</span><span class='o'>.</span><span class='n'>zip_code</span><span class='o'>.</span><span class='n'>blank?</span> <span class='o'>&amp;&amp;</span> <span class='o'>!</span><span class='nb'>self</span><span class='o'>.</span><span class='n'>with_in</span><span class='o'>.</span><span class='n'>blank?</span> <span class='o'>&amp;&amp;</span> <span class='n'>code</span> <span class='o'>=</span> <span class='no'>Geocode</span><span class='o'>.</span><span class='n'>geocoder</span><span class='o'>.</span><span class='n'>locate</span><span class='p'>(</span><span class='nb'>self</span><span class='o'>.</span><span class='n'>zip_code</span><span class='p'>)</span>
-  <span class='n'>adjust_solr_params</span> <span class='k'>do</span> <span class='o'>|</span><span class='n'>params</span><span class='o'>|</span>
-    <span class='n'>params</span><span class='o'>[</span><span class='ss'>:spatial</span><span class='o'>]</span> <span class='o'>=</span> <span class='s2'>&quot;{!radius=</span><span class='si'>#{</span><span class='nb'>self</span><span class='o'>.</span><span class='n'>with_in</span><span class='o'>.</span><span class='n'>to_i</span><span class='si'>}</span><span class='s2'>.0 sort=true}</span><span class='si'>#{</span><span class='n'>code</span><span class='o'>.</span><span class='n'>latitude</span><span class='o'>.</span><span class='n'>to_f</span><span class='si'>}</span><span class='s2'>,</span><span class='si'>#{</span><span class='n'>code</span><span class='o'>.</span><span class='n'>longitude</span><span class='o'>.</span><span class='n'>to_f</span><span class='si'>}</span><span class='s2'>&quot;</span>
-    <span class='c1'># spatial={!radius=10.0 sort=true}lat:40.0,lng:-70.0</span>
-  <span class='k'>end</span>
-<span class='k'>end</span>
-</code></pre>
-</div>
-<p>And that&#8217;s it. You now have solr-spatial-light support which is still supported by <a href='http://websolr.com'>WebSolr</a> and is running beautifully in my production environment.</p>
+<p>In your search block you can filter using the adjust_solr_params method. I use a model to wrap my searches with a set of attr_accessors which get set by the form (that is where self.zipcode and self.with_in come from. The first is a postal code, the second is the radius number in miles. Liquid error: No such file or directory - posix_spawnp And that&#8217;s it. You now have solr-spatial-light support which is still supported by <a href='http://websolr.com'>WebSolr</a> and is running beautifully in my production environment.</p>
     </div>
 
     <div id="disqus_thread"></div>

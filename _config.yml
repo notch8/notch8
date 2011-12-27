@@ -4,6 +4,7 @@ lsi:         true
 server_port: 4000
 pygments:    true
 markdown:    maruku
+exclude:     ["Gemfile", "Gemfile.lock", ".rvmrc"]
 permalink:   date
 maruku:
   use_tex:    false

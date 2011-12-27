@@ -67,158 +67,18 @@
 <h2 id='instuctions'>Instuctions</h2>
 
 <p>Open the VM and then log in with the password &#8220;letslearn&#8221;. Once the VM boots please open Terminal (its on the desktop). When you open the terminal it will ask for a new password and then ask for an SSH passphrase (leave that blank). Once that is done, do the following:</p>
-<div class='highlight'><pre><code class='bash'>    <span class='nv'>$ </span><span class='nb'>cd </span>work
 
-    <span class='nv'>$ </span>rails new tutor -d mysql -T -J -m rails3_template.rb
+<p>Liquid error: No such file or directory - posix_spawnp</p>
 
-    <span class='nv'>$ </span><span class='nb'>cd </span>tutor
-
-    <span class='nv'>$ </span>rake db:create
-
-    <span class='nv'>$ </span>./script/rails g scaffold Page title:string body:text
-</code></pre>
-</div>
 <p>edit route file:</p>
 
 <p><em>uncomment root :to =&gt; &#8220;pages#index&#8221;</em></p>
-<div class='highlight'><pre><code class='bash'>    <span class='nv'>$ </span>rake db:migrate
 
-    <span class='nv'>$ </span>./script/rails s
-</code></pre>
-</div>
+<p>Liquid error: No such file or directory - posix_spawnp</p>
+
 <p>Here is the code from the template.</p>
-<div class='highlight'><pre><code class='ruby'><span class='c1'># An application template for Rails 3</span>
-<span class='n'>gem</span> <span class='s2'>&quot;factory_girl_rails&quot;</span><span class='p'>,</span>     <span class='ss'>:group</span> <span class='o'>=&gt;</span> <span class='o'>[</span><span class='ss'>:development</span><span class='p'>,</span> <span class='ss'>:test</span><span class='o'>]</span>
-<span class='n'>gem</span> <span class='s2'>&quot;factory_girl_generator&quot;</span><span class='p'>,</span> <span class='ss'>:group</span> <span class='o'>=&gt;</span> <span class='o'>[</span><span class='ss'>:development</span><span class='p'>,</span> <span class='ss'>:test</span><span class='o'>]</span>
-<span class='n'>gem</span> <span class='s2'>&quot;rspec&quot;</span><span class='p'>,</span>                  <span class='ss'>:group</span> <span class='o'>=&gt;</span> <span class='o'>[</span><span class='ss'>:development</span><span class='p'>,</span> <span class='ss'>:test</span><span class='o'>]</span>
-<span class='n'>gem</span> <span class='s2'>&quot;rspec-rails&quot;</span><span class='p'>,</span>            <span class='ss'>:group</span> <span class='o'>=&gt;</span> <span class='o'>[</span><span class='ss'>:development</span><span class='p'>,</span> <span class='ss'>:test</span><span class='o'>]</span>
-<span class='n'>gem</span> <span class='s2'>&quot;haml&quot;</span>
-<span class='n'>gem</span> <span class='s2'>&quot;haml-rails&quot;</span>
-<span class='n'>gem</span> <span class='s2'>&quot;compass&quot;</span>
-<span class='n'>gem</span> <span class='s2'>&quot;taps&quot;</span>
-<span class='n'>gem</span> <span class='s2'>&quot;heroku&quot;</span><span class='p'>,</span>                 <span class='ss'>:group</span> <span class='o'>=&gt;</span> <span class='ss'>:development</span>
 
-<span class='k'>begin</span>
-  <span class='nb'>require</span> <span class='s1'>&#39;bundler&#39;</span>
-<span class='k'>rescue</span> <span class='no'>Bundler</span><span class='o'>::</span><span class='no'>GemNotFound</span> <span class='o'>=&gt;</span> <span class='n'>e</span>
-  <span class='no'>STDERR</span><span class='o'>.</span><span class='n'>puts</span> <span class='n'>e</span><span class='o'>.</span><span class='n'>message</span>
-  <span class='nb'>exit!</span>
-<span class='k'>end</span>
-
-<span class='n'>run</span> <span class='s1'>&#39;bundle install&#39;</span>
-
-<span class='n'>run</span> <span class='s1'>&#39;rails g rspec:install&#39;</span>
-
-<span class='n'>generators</span> <span class='o'>=</span> <span class='o'>&lt;&lt;-</span><span class='no'>GENERATORS</span>
-<span class='sh'>    </span>
-<span class='sh'>    config.generators do |g|</span>
-<span class='sh'>      g.test_framework :rspec, :fixture =&gt; true, :views =&gt; false</span>
-<span class='sh'>      g.integration_tool :rspec, :fixture =&gt; true, :views =&gt; true</span>
-<span class='sh'>      g.template_engine :haml</span>
-<span class='sh'>      g.fixture_replacement :factory_girl</span>
-<span class='sh'>    end</span>
-<span class='no'>GENERATORS</span>
-
-<span class='n'>application</span> <span class='n'>generators</span>
-
-<span class='k'>if</span> <span class='o'>!</span><span class='n'>options</span><span class='o'>[</span><span class='s2'>&quot;skip_prototype&quot;</span><span class='o'>]</span>
-  <span class='c1'># removing prototype files</span>
-  <span class='n'>remove_file</span> <span class='s2'>&quot;public/javascripts/controls.js&quot;</span>
-  <span class='n'>remove_file</span> <span class='s2'>&quot;public/javascripts/dragdrop.js&quot;</span>
-  <span class='n'>remove_file</span> <span class='s2'>&quot;public/javascripts/effects.js&quot;</span>
-  <span class='n'>remove_file</span> <span class='s2'>&quot;public/javascripts/prototype.js&quot;</span>
-  <span class='n'>remove_file</span> <span class='s2'>&quot;public/javascripts/jrails.js&quot;</span>
-<span class='k'>end</span>
-
-<span class='c1'># getting jquery and rails.js for jquery</span>
-<span class='n'>get</span> <span class='s2'>&quot;http://code.jquery.com/jquery-1.4.4.min.js&quot;</span><span class='p'>,</span>  <span class='s2'>&quot;public/javascripts/jquery.js&quot;</span>
-<span class='n'>get</span> <span class='s2'>&quot;https://github.com/rails/jquery-ujs/raw/master/src/rails.js&quot;</span><span class='p'>,</span> <span class='s2'>&quot;public/javascripts/rails.js&quot;</span>
-<span class='c1'># ... and use it!</span>
-<span class='n'>gsub_file</span> <span class='s1'>&#39;config/application.rb&#39;</span><span class='p'>,</span> <span class='s1'>&#39;config.action_view.javascript_expansions[:defaults] = %w()&#39;</span><span class='p'>,</span> <span class='s1'>&#39;config.action_view.javascript_expansions[:defaults] = %w(jquery rails application)&#39;</span>
-
-<span class='c1'># describing of layout application</span>
-<span class='n'>layout</span> <span class='o'>=</span> <span class='o'>&lt;&lt;-</span><span class='no'>LAYOUT</span>
-<span class='sh'>!!!</span>
-<span class='sh'>%html</span>
-<span class='sh'>  %head</span>
-<span class='sh'>    %title= h(yield(:title) || &quot;Untitled&quot;)</span>
-<span class='sh'>    = stylesheet_link_tag :all</span>
-<span class='sh'>    = javascript_include_tag :defaults</span>
-<span class='sh'>    = csrf_meta_tag</span>
-<span class='sh'>    </span>
-<span class='sh'>    = yield(:head)</span>
-<span class='sh'>  %body</span>
-<span class='sh'>    #container</span>
-<span class='sh'>      - flash.each do |name, msg|</span>
-<span class='sh'>        = content_tag :div, msg, :id =&gt; &quot;flash_\#\{name\}&quot;, :class =&gt; &#39;flash&#39;</span>
-<span class='sh'>      %nav</span>
-<span class='sh'>        = link_to &quot;Home&quot;, root_url</span>
-<span class='sh'>      %header</span>
-<span class='sh'>        - if show_title?</span>
-<span class='sh'>          %h1=h yield(:title)</span>
-<span class='sh'>      %article</span>
-<span class='sh'>        = yield</span>
-<span class='sh'>      %footer</span>
-<span class='sh'>    </span>
-<span class='no'>LAYOUT</span>
-
-<span class='c1'># ... and a layout helper</span>
-<span class='n'>layout_helper</span> <span class='o'>=</span> <span class='o'>&lt;&lt;-</span><span class='no'>LAYOUTHELPER</span>
-<span class='sh'># These helper methods can be called in your template to set variables to be used in the layout</span>
-<span class='sh'># This module should be included in all views globally,</span>
-<span class='sh'># to do so you may need to add this line to your ApplicationController</span>
-<span class='sh'>#   helper :layout</span>
-<span class='sh'>module LayoutHelper</span>
-<span class='sh'>  def title(page_title, show_title = true)</span>
-<span class='sh'>    content_for(:title) { page_title.to_s }</span>
-<span class='sh'>    @show_title = show_title</span>
-<span class='sh'>  end</span>
-<span class='sh'>  </span>
-<span class='sh'>  def show_title?</span>
-<span class='sh'>    @show_title</span>
-<span class='sh'>  end</span>
-<span class='sh'>  </span>
-<span class='sh'>  def stylesheet(*args)</span>
-<span class='sh'>    content_for(:head) { stylesheet_link_tag(*args) }</span>
-<span class='sh'>  end</span>
-<span class='sh'>  </span>
-<span class='sh'>  def javascript(*args)</span>
-<span class='sh'>    content_for(:head) { javascript_include_tag(*args) }</span>
-<span class='sh'>  end</span>
-<span class='sh'>  </span>
-<span class='sh'>end</span>
-<span class='no'>LAYOUTHELPER</span>
-
-<span class='c1'># adding correct routes</span>
-<span class='n'>new_routes</span> <span class='o'>=</span> <span class='o'>&lt;&lt;-</span><span class='no'>ROUTES</span>
-<span class='sh'>  #root :to =&gt; &#39;pages#index&#39;</span>
-<span class='no'>ROUTES</span>
-
-<span class='c1'># ... inject there</span>
-<span class='n'>inject_into_file</span> <span class='s2'>&quot;config/routes.rb&quot;</span><span class='p'>,</span> <span class='s2'>&quot;</span><span class='se'>\n</span><span class='si'>#{</span><span class='n'>new_routes</span><span class='si'>}</span><span class='s2'>&quot;</span><span class='p'>,</span> <span class='ss'>:after</span> <span class='o'>=&gt;</span> <span class='s2'>&quot;</span><span class='si'>#{</span><span class='n'>app_name</span><span class='o'>.</span><span class='n'>classify</span><span class='si'>}</span><span class='s2'>::Application.routes.draw do&quot;</span>
-
-
-<span class='c1'># removing unused files</span>
-<span class='n'>remove_file</span> <span class='s2'>&quot;README&quot;</span>
-<span class='n'>remove_file</span> <span class='s2'>&quot;public/index.html&quot;</span>
-<span class='n'>remove_file</span> <span class='s2'>&quot;public/images/rails.png&quot;</span>
-<span class='n'>remove_file</span> <span class='s2'>&quot;app/views/layouts/application.html.erb&quot;</span>
-
-<span class='c1'># creating the new ones</span>
-<span class='n'>create_file</span> <span class='s1'>&#39;README&#39;</span>
-<span class='n'>create_file</span> <span class='s2'>&quot;app/views/layouts/application.html.haml&quot;</span><span class='p'>,</span> <span class='n'>layout</span>
-<span class='n'>create_file</span> <span class='s2'>&quot;app/helpers/layout_helper.rb&quot;</span><span class='p'>,</span> <span class='n'>layout_helper</span>
-
-<span class='n'>run</span> <span class='s2'>&quot;compass init rails . -x sass  --using blueprint/semantic --sass-dir public/stylesheets/sass --css-dir public/stylesheets&quot;</span>
-  
-<span class='nb'>puts</span> <span class='s2'>&quot;go to directory and let rails go ;)&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;$ cd </span><span class='si'>#{</span><span class='n'>app_name</span><span class='si'>}</span><span class='s2'>&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;$ rake db:create&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;$ ./script/rails g scaffold Pages title:string body:text&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;edit config/routes.rb and uncomment root :to =&gt; &#39;pages#index&#39;&quot;</span>
-<span class='nb'>puts</span> <span class='s2'>&quot;$ ./script/rails s&quot;</span>
-</code></pre>
-</div>
+<p>Liquid error: No such file or directory - posix_spawnp</p>
     </div>
     
   </div>

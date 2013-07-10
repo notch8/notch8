@@ -2,7 +2,7 @@
 layout: main
 title: Services
 ---
-# Welcome to the download page for the MadRailers "Newbie" night.  
+# Welcome to the download page for the MadRailers "Newbie" night.
 Here you'll find a VMWare image to download and run in order to get
 everyone on the same page and up and running quickly.
 
@@ -30,7 +30,7 @@ open the terminal it will ask for a new password and then ask for an SSH passphr
 {% highlight bash %}
     $ cd work
 
-    $ rails new tutor -d mysql -T -J -m rails3_template.rb
+    $ rails new tutor -T -m rails3_template.rb
 
     $ cd tutor
 
@@ -60,7 +60,6 @@ gem "rspec",                  :group => [:development, :test]
 gem "rspec-rails",            :group => [:development, :test]
 gem "haml"
 gem "haml-rails"
-gem "compass"
 gem "taps"
 gem "heroku",                 :group => :development
 
@@ -76,7 +75,7 @@ run 'bundle install'
 run 'rails g rspec:install'
 
 generators = <<-GENERATORS
-    
+
     config.generators do |g|
       g.test_framework :rspec, :fixture => true, :views => false
       g.integration_tool :rspec, :fixture => true, :views => true
@@ -87,21 +86,6 @@ GENERATORS
 
 application generators
 
-if !options["skip_prototype"]
-  # removing prototype files
-  remove_file "public/javascripts/controls.js"
-  remove_file "public/javascripts/dragdrop.js"
-  remove_file "public/javascripts/effects.js"
-  remove_file "public/javascripts/prototype.js"
-  remove_file "public/javascripts/jrails.js"
-end
-
-# getting jquery and rails.js for jquery
-get "http://code.jquery.com/jquery-1.4.4.min.js",  "public/javascripts/jquery.js"
-get "https://github.com/rails/jquery-ujs/raw/master/src/rails.js", "public/javascripts/rails.js"
-# ... and use it!
-gsub_file 'config/application.rb', 'config.action_view.javascript_expansions[:defaults] = %w()', 'config.action_view.javascript_expansions[:defaults] = %w(jquery rails application)'
-
 # describing of layout application
 layout = <<-LAYOUT
 !!!
@@ -111,7 +95,7 @@ layout = <<-LAYOUT
     = stylesheet_link_tag :all
     = javascript_include_tag :defaults
     = csrf_meta_tag
-    
+
     = yield(:head)
   %body
     #container
@@ -125,7 +109,7 @@ layout = <<-LAYOUT
       %article
         = yield
       %footer
-    
+
 LAYOUT
 
 # ... and a layout helper
@@ -139,19 +123,19 @@ module LayoutHelper
     content_for(:title) { page_title.to_s }
     @show_title = show_title
   end
-  
+
   def show_title?
     @show_title
   end
-  
+
   def stylesheet(*args)
     content_for(:head) { stylesheet_link_tag(*args) }
   end
-  
+
   def javascript(*args)
     content_for(:head) { javascript_include_tag(*args) }
   end
-  
+
 end
 LAYOUTHELPER
 
@@ -175,8 +159,6 @@ create_file 'README'
 create_file "app/views/layouts/application.html.haml", layout
 create_file "app/helpers/layout_helper.rb", layout_helper
 
-run "compass init rails . -x sass  --using blueprint/semantic --sass-dir public/stylesheets/sass --css-dir public/stylesheets"
-  
 puts "go to directory and let rails go ;)"
 puts "$ cd #{app_name}"
 puts "$ rake db:create"
@@ -185,4 +167,4 @@ puts "edit config/routes.rb and uncomment root :to => 'pages#index'"
 puts "$ ./script/rails s"
 
 
-{% endhighlight %} 
+{% endhighlight %}

@@ -1,1 +1,1 @@
-rvm 1.9.2@notch8_site --create
+rvm ruby-1.9.2-p0@notch8

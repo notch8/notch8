@@ -7,6 +7,7 @@ GEM
       fast-stemmer (>= 1.0.0)
     directory_watcher (1.4.1)
     fast-stemmer (1.0.0)
+    haml (3.1.4)
     jekyll (0.11.1)
       albino (~> 1.3)
       classifier (~> 1.3)
@@ -19,11 +20,16 @@ GEM
     maruku (0.6.0)
       syntax (>= 1.0.0)
     posix-spawn (0.3.6)
+    sass (3.1.12)
+    simplegem (1.0.0)
     syntax (1.0.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   jekyll
   maruku
+  sass
+  simplegem

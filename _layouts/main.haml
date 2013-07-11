@@ -1,0 +1,51 @@
+!!!
+%head
+  %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
+  %title Notch8 - {{ page.title }}
+
+  {{ 'main' | stylesheet }}
+
+  %script{:src =>"//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"}
+  {{ 'bootstrap.min' | javascript }}
+  {{ 'jquery.cycle.lite.1.0.min' | javascript }}
+
+  %link{:href => "/favicon.ico", :rel => "shortcut icon"}/
+  %link{:href => "/articles.atom", :rel => "alternate", :title => "Feed for Notch8", :type => "application/atom+xml"}/
+
+
+  %body#index
+    #topNav
+      .logoContainer
+        %a{:href => "/"}
+          %img{:src => "{{'logo_notch8_small.gif' | asset_path}}"}/
+      .navContainer
+        %ul#topNav
+          %li
+            %a{:href => "/"} Home
+          %li
+            %a{:href => "/blog.html"} Blog
+          %li
+            %a{:href => "/portfolio.html"} Portfolio
+          %li
+            %a{:href => "/services.html"} Services
+          %li
+            %a{:href => "/speaking.html"} Speaking
+          %li
+            %a{:href => "/contact.html"} Contact
+    .container
+      {{ content }}
+    .white_box
+      copyright © 2013 Notch8 and licensed under the
+      %a{:href => "http://creativecommons.org/licenses/by-sa/3.0/us/"} creative commons attribution-share alike license
+
+  :javascript
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8635145-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+

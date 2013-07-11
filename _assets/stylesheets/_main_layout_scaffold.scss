@@ -1,0 +1,20 @@
+.container{
+    @extend .sunset;
+}
+
+#topNav{
+    @extend .row;    
+
+    .logoContainer{
+        @extend .span3;
+    }
+
+    .navContainer{
+        @extend .span9;
+
+        ul{
+            @extend .nav;
+            @extend .nav-pills;
+        }
+    }
+}

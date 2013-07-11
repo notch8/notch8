@@ -4,7 +4,7 @@
  <title>Notch8</title>
  <link href="http://notch8.com/articles.atom" rel="self"/>
  <link href="http://notch8.com/"/>
- <updated>2013-07-10T17:08:03-07:00</updated>
+ <updated>2013-07-11T10:17:11-07:00</updated>
  <id>http://notch8.com/</id>
  <author>
    <name>Rob Kaufman</name>
@@ -63,9 +63,22 @@
    <id>http://notch8.com//2011/02/22/sunspot-spatial</id>
    <content type="html">&lt;p&gt;Geohashing is super cool, but it doesn&amp;#8217;t allow you to sort by distance (yet) and there are still some major issues when it comes to accuracy. Solr-spatial-light gives you accuracy and sortability, but it is more difficult to scale. To me (and my clients) &amp;#8220;works but takes more hardware&amp;#8221; trumps &amp;#8220;doesn&amp;#8217;t work but effecient&amp;#8221;. Word on the street is that the next release of Sunspot will once again support solr-spatial-light and that support will stay in until Geohashing becomes feature complete. In the meantime here are the steps to getting solr-spatial-light working with Sunspot 1.2&lt;/p&gt;
 
-&lt;p&gt;In your searchable block add: Liquid error: No such file or directory - posix_spawnp These should be the latitude and longitude of your object. I&amp;#8217;m using &lt;a href='http://graticule.rubyforge.org/plugin.html'&gt;acts_as_geocodable&lt;/a&gt; to do my geocoding and storing the lat and lng as doubles in my db.&lt;/p&gt;
+&lt;p&gt;In your searchable block add:&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='n'&gt;float&lt;/span&gt; &lt;span class='ss'&gt;:lat&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='ss'&gt;:as&lt;/span&gt; &lt;span class='o'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;lat&amp;#39;&lt;/span&gt;
+&lt;span class='n'&gt;float&lt;/span&gt; &lt;span class='ss'&gt;:lng&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='ss'&gt;:as&lt;/span&gt; &lt;span class='o'&gt;=&amp;gt;&lt;/span&gt; &lt;span class='s1'&gt;&amp;#39;lng&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;These should be the latitude and longitude of your object. I&amp;#8217;m using &lt;a href='http://graticule.rubyforge.org/plugin.html'&gt;acts_as_geocodable&lt;/a&gt; to do my geocoding and storing the lat and lng as doubles in my db.&lt;/p&gt;
 
-&lt;p&gt;In your search block you can filter using the adjust_solr_params method. I use a model to wrap my searches with a set of attr_accessors which get set by the form (that is where self.zipcode and self.with_in come from. The first is a postal code, the second is the radius number in miles. Liquid error: No such file or directory - posix_spawnp And that&amp;#8217;s it. You now have solr-spatial-light support which is still supported by &lt;a href='http://websolr.com'&gt;WebSolr&lt;/a&gt; and is running beautifully in my production environment.&lt;/p&gt;</content>
+&lt;p&gt;In your search block you can filter using the adjust_solr_params method. I use a model to wrap my searches with a set of attr_accessors which get set by the form (that is where self.zipcode and self.with_in come from. The first is a postal code, the second is the radius number in miles.&lt;/p&gt;
+&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='ruby'&gt;&lt;span class='c1'&gt;# distance filters&lt;/span&gt;
+&lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='o'&gt;!&lt;/span&gt;&lt;span class='nb'&gt;self&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;zip_code&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;blank?&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='o'&gt;!&lt;/span&gt;&lt;span class='nb'&gt;self&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;with_in&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;blank?&lt;/span&gt; &lt;span class='o'&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class='n'&gt;code&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='no'&gt;Geocode&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;geocoder&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;locate&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='nb'&gt;self&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;zip_code&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;
+  &lt;span class='n'&gt;adjust_solr_params&lt;/span&gt; &lt;span class='k'&gt;do&lt;/span&gt; &lt;span class='o'&gt;|&lt;/span&gt;&lt;span class='n'&gt;params&lt;/span&gt;&lt;span class='o'&gt;|&lt;/span&gt;
+    &lt;span class='n'&gt;params&lt;/span&gt;&lt;span class='o'&gt;[&lt;/span&gt;&lt;span class='ss'&gt;:spatial&lt;/span&gt;&lt;span class='o'&gt;]&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='s2'&gt;&amp;quot;{!radius=&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='nb'&gt;self&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;with_in&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;to_i&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;.0 sort=true}&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;code&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;latitude&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;to_f&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;,&lt;/span&gt;&lt;span class='si'&gt;#{&lt;/span&gt;&lt;span class='n'&gt;code&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;longitude&lt;/span&gt;&lt;span class='o'&gt;.&lt;/span&gt;&lt;span class='n'&gt;to_f&lt;/span&gt;&lt;span class='si'&gt;}&lt;/span&gt;&lt;span class='s2'&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class='c1'&gt;# spatial={!radius=10.0 sort=true}lat:40.0,lng:-70.0&lt;/span&gt;
+  &lt;span class='k'&gt;end&lt;/span&gt;
+&lt;span class='k'&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And that&amp;#8217;s it. You now have solr-spatial-light support which is still supported by &lt;a href='http://websolr.com'&gt;WebSolr&lt;/a&gt; and is running beautifully in my production environment.&lt;/p&gt;</content>
  </entry>
  
  <entry>

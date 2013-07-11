@@ -1,0 +1,65 @@
+!!!
+%head
+  %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
+  %title Notch8 - {{ page.title }}
+  %link{:charset => "utf-8", :href => "/stylesheets/style.css", :media => "all", :rel => "stylesheet", :title => "no title", :type => "text/css"}/
+  %link{:charset => "utf-8", :href => "/stylesheets/native.css", :media => "all", :rel => "stylesheet", :title => "no title", :type => "text/css"}/
+  %link{:href => "/favicon.ico", :rel => "shortcut icon"}/
+  %link{:href => "/articles.atom", :rel => "alternate", :title => "Feed for Notch8", :type => "application/atom+xml"}/
+  :javascript
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8635145-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  %body#index
+  .white_box
+    .left
+      %a{:href => "/"}
+        %img{:src => "/images/logo_notch8_small.gif"}/
+    .right
+      %h2#slogan Full Throttle Ruby and Rails Development
+    .header
+      %h3
+        %a{:href => "/"} Home
+      %h3
+        %a{:href => "/blog.html"} Blog
+      %h3
+        %a{:href => "/portfolio.html"} Portfolio
+      %h3
+        %a{:href => "/services.html"} Services
+      / <h3><a href='#'>Projects</a></h3>
+      %h3
+        %a{:href => "/speaking.html"} Speaking
+      / <h3><a href='/about.html'>About</a></h3>
+      %h3
+        %a{:href => "/contact.html"} Contact
+    .container
+      %h2
+        %a{:href => "{{ post.url }}"} {{ page.title }}
+      {{ content }}
+    #disqus_thread
+    :javascript
+      var disqus_url = "http://notch8.com/{{ page.url }}";
+      var disqus_title ="{{ page.title }}";
+      var disqus_identifier = "{{ page.url }}";
+      var disqus_developer = 1;
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://notch8.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+        %noscript
+      Please enable JavaScript to view the
+      %a{:href => "http://disqus.com/?ref_noscript=notch8"} comments powered by Disqus.
+    %a.dsq-brlink{:href => "http://disqus.com"}
+      blog comments powered by
+      %span.logo-disqus Disqus
+  .white_box
+    copyright © 2013 Notch8 and licensed under the
+    %a{:href => "http://creativecommons.org/licenses/by-sa/3.0/us/"} creative commons attribution-share alike license

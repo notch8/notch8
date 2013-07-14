@@ -1,3 +1,19 @@
+---
+navigation:
+  - text: 'Home'
+    url: '/index.html'
+  - text: 'Blog'
+    url: '/blog.html'
+  - text: 'Portfolio'
+    url: '/portfolio.html'
+  - text: 'Services'
+    url: '/services.html'
+  - text: 'Speaking'
+    url: '/speaking.html'
+  - text: 'Contact'
+    url: '/contact.html'
+---
+
 !!!
 %head
   %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-type"}/
@@ -15,28 +31,29 @@
 
   %body#index
     #topNav
-      .logoContainer
-        %a{:href => "/"}
-          %img{:src => "{{'logo_notch8_small.gif' | asset_path}}"}/
-      .navContainer
-        %ul#topNav
-          %li
-            %a{:href => "/"} Home
-          %li
-            %a{:href => "/blog.html"} Blog
-          %li
-            %a{:href => "/portfolio.html"} Portfolio
-          %li
-            %a{:href => "/services.html"} Services
-          %li
-            %a{:href => "/speaking.html"} Speaking
-          %li
-            %a{:href => "/contact.html"} Contact
-    .container
+      .row
+        .logoContainer.span2
+          %a{:href => "/"}
+            %img{:src => "{{'logo_notch8_small.gif' | asset_path}}"}
+        .navContainer.span8
+          %ul.nav.nav-pills
+            {% for link in page.navigation %} 
+            {% if page.url == link.url %} 
+            %li{class: 'active'}
+              %a{:href=> "#"}
+                {{link.text}}
+            {% else %} 
+            %li
+              %a{:href => "{{link.url}}"} {{link.text}}
+            {% endif %} 
+            {% endfor %} 
+    #mainContent
       {{ content }}
-    .white_box
-      copyright © 2013 Notch8 and licensed under the
-      %a{:href => "http://creativecommons.org/licenses/by-sa/3.0/us/"} creative commons attribution-share alike license
+    #footer
+      .row
+        .span11.offset1
+          copyright © 2013 Notch8 and licensed under the
+          %a{:href => "http://creativecommons.org/licenses/by-sa/3.0/us/"} creative commons attribution-share alike license
 
   :javascript
     var _gaq = _gaq || [];

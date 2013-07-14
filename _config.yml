@@ -1,14 +1,13 @@
 destination: ./_site
-port:        4000
-pygments:    true
-markdown:    maruku
-exclude:     ["Gemfile", "Gemfile.lock", ".rvmrc"]
-permalink:   date
+port: 4000
+pygments: true
+markdown: maruku
+exclude: ["Gemfile", "Gemfile.lock", ".rvmrc"]
+permalink: date
 maruku:
-  use_tex:    false
-  use_divs:   false
-  png_dir:    images/latex
-  png_url:    /images/latex
+  use_tex: false
+  use_divs: false
+  png_dir: images/latex
+  png_url: /images/latex
 sass:
-    syntax: scss        # scss|sass
-    style:  compressed  # nested|expanded|compact|compressed
+  syntax: scss

@@ -1,0 +1,28 @@
+#index{
+    h1{
+        padding-top: 30px;
+        margin-left: 0px;
+    }
+
+    #slideshow{
+        padding: 30px 0;
+        min-height: 320px;
+        img{
+            @extend .img-polaroid;
+        }
+    }
+
+    #aboutNotch8{
+        padding-top: 30px;
+        @extend .gray_fade_in;
+
+        .weBelieveIn, .weStriveFor{
+            @extend .well;
+            border-top: 3px solid black;
+        }
+
+        h3{
+            margin: 0px;
+        }
+    }
+}

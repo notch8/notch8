@@ -1,20 +1,48 @@
-.container{
+#mainContent{
     @extend .sunset;
 }
 
 #topNav{
-    @extend .row;    
+    @extend .gray_hard_bottom;
+    padding: 20px 0;
 
     .logoContainer{
-        @extend .span3;
+        @extend .span2;
+        @extend .offset1;
     }
 
     .navContainer{
         @extend .span9;
+        margin-top: 25px;
 
         ul{
+            @extend .pull-right;
             @extend .nav;
             @extend .nav-pills;
+            margin-bottom: 0px;
+            font-weight: bolder;
+            li{
+                a{
+                    color: black;
+                }
+
+                &.active > a, .active {
+                    @extend .chrome;
+                }
+            }
+
+ 
         }
+    }
+}
+
+#footer{
+    @extend .dark_gray;
+    height: 30px;
+    color: black;
+    padding-top: 5px;
+    a{
+        color: black;
+        text-decoration: underline;
     }
 }

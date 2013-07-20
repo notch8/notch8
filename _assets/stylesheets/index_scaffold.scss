@@ -16,9 +16,15 @@
         padding-top: 30px;
         @extend .gray_fade_in;
 
+        h2{
+            color: #6b6b6b;
+            font-size: 1.8em;
+        }
+
         .weBelieveIn, .weStriveFor{
             @extend .well;
             border-top: 3px solid black;
+            @extend .dropshadow;
         }
 
         h3{

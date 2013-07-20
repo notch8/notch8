@@ -6530,6 +6530,9 @@ a.badge:focus {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b5bdc8', endColorstr='#bfbfbf',GradientType=0 );
   /* IE6-9 */ }
 
+.dropshadow, #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 .weStriveFor {
+  box-shadow: 10px 10px 5px #888888; }
+
 #topNav {
   padding: 20px 0; }
   #topNav .navContainer {
@@ -6556,6 +6559,9 @@ a.badge:focus {
   min-height: 320px; }
 #index #aboutNotch8 {
   padding-top: 30px; }
+  #index #aboutNotch8 h2 {
+    color: #6b6b6b;
+    font-size: 1.8em; }
   #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 .weStriveFor {
     border-top: 3px solid black; }
   #index #aboutNotch8 h3 {

@@ -6574,5 +6574,10 @@ a.badge:focus {
     #posts h3 a {
       color: black; }
 
+#portfolio {
+  background-color: white;
+  margin: 10px;
+  padding: 10px; }
+
 body {
   font-family: 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif; }

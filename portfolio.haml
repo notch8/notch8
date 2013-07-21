@@ -2,26 +2,23 @@
 layout: main
 title: Portfolio
 ---
-.portfolio
-  / title="Notch8 has been working with the Assay Depot from day one.  We started out with just one in house developer, who was new to Rails.  Together we built this innovative site using Merb and Couchdb.  At time this team has scaled up to 5 developers and down to 2."
-  %img{:src => "/images/portfolio/shoptab.png"}/
-  %img{:src => "/images/portfolio/assaydepot-icon.png"}/
-  %img{:src => "/images/portfolio/turn2live-icon.png"}/
-  %img{:src => "/images/portfolio/measuredvoice-icon.png"}/
-  %img{:src => "/images/portfolio/connect2need-icon.png"}/
-  %img{:src => "/images/portfolio/sdruby-icon.png"}/
-  %img{:src => "/images/portfolio/callaway-icon.png"}/
-  %img{:src => "/images/portfolio/culturewaves-icon.png"}/
-  %img{:src => "/images/portfolio/foodchannel-icon.png"}/
-  %img{:src => "/images/portfolio/ljk-icon.png"}/
-  %img{:src => "/images/portfolio/ecrowds-icon.png"}/
-  %img{:src => "/images/portfolio/gumgum-icon.png"}/
-  %img{:src => "/images/portfolio/icalshare-icon.png"}/
-  %img{:src => "/images/portfolio/redrover-icon.png"}/
-  %img{:src => "/images/portfolio/cinematreasures-icon.png"}/
-  %img{:src => "/images/portfolio/locomobi-icon.png"}/
-  %img{:src => "/images/portfolio/whurls-icon.png"}/
-/
-  <script type="text/javascript" charset="utf-8">
-  $("[title]").tooltip();
-  </script>
+.row
+  .span10.offset1
+    #portfolio
+      %img{:src => "{{'portfolio/shoptab.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/assaydepot-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/turn2live-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/measuredvoice-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/connect2need-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/sdruby-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/callaway-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/culturewaves-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/foodchannel-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/ljk-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/ecrowds-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/gumgum-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/icalshare-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/redrover-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/cinematreasures-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/locomobi-icon.png' | asset_path}}"}
+      %img{:src => "{{'portfolio/whurls-icon.png' | asset_path}}"}

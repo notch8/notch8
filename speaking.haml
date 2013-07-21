@@ -1,0 +1,46 @@
+---
+layout: main
+title: Speaking
+---
+#speaking
+  .row
+    .span10.offset1
+      %h1 Speaking Engagements
+  .row
+    .span10.offset1
+      #conferences
+        .row
+          .span9
+            %a{:href => "http://www.rubymidwest.com/speakers.html"}
+              %img{:src => "{{ 'rubymidwestlogo.png' | asset_path}}"}/
+        .row
+          .span4
+            %a{:href => "https://conferences.oreillynet.com/cs/rails2007/view/e_sess/11646"}
+              %img{:src => "{{ 'railsconflogo.png' | asset_path}}"}/
+          .span4.offset1
+            %a{:href => "http://merbcamp.com/video.html"}
+              %img{:src => "{{ 'merbcamplogo.gif' | asset_path}}"}/
+        .row
+          .span5.offset2
+            %a{:href => "http://sdruby.org/podcast"}
+              %img.center{:src => "{{ 'sdrubylogo.png' | asset_path}}"}/
+
+  .row
+    .span10.offset1
+      %h1 Presentations
+  .row
+    .span10.offset1
+      #presentations
+        %div{:style => "width:577px;margin:auto;"}
+          %object{:height => "410", :style => "margin:0px", :width => "575"}
+            %param{:name => "movie", :value => "http://static.slidesharecdn.com/swf/multiwidget.swf"}/
+            %param{:name => "allowFullScreen", :value => "true"}/
+            %param{:name => "allowScriptAccess", :value => "always"}/
+            %param{:name => "flashVars", :value => "feedurl=user/notch8&widgettitle=Notch8%20Presentations"}/
+            %embed{:allowfullscreen => "true", :allowscriptaccess => "always", :flashvars => "feedurl=user/notch8&widgettitle=Notch8%20Presentations", :height => "410", :src => "http://static.slidesharecdn.com/swf/multiwidget.swf", :type => "application/x-shockwave-flash", :width => "575"}
+          %br/
+          %div{:style => "font-size:11px;font-family:tahoma,arial;height:26px;padding-top:2px;text-align:left;"}
+            %a{:href => "http://www.slideshare.net/?src=multiwidget", :title => "SlideShare"}
+              %img{:alt => "SlideShare", :src => "http://static.slidesharecdn.com/swf/logo_embd.png", :style => "border:0px none;margin-bottom:-5px"}/
+            |
+            %a{:href => "http://www.slideshare.net/widgets/playlist", :title => "Get your SlideShare Playlist"} Get your SlideShare Playlist

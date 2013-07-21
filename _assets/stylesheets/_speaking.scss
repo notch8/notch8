@@ -1,0 +1,6 @@
+#speaking{
+    #conferences, #presentations{
+        @extend .white_content_container;
+        @extend .dropshadow_orange;
+    }
+}

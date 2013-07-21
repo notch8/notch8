@@ -6533,8 +6533,13 @@ a.badge:focus {
 .dropshadow, #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 .weStriveFor {
   box-shadow: 6px 6px 5px #888888; }
 
-.dropshadow_orange, #services .well, #services #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 #services .weBelieveIn, #services #index #aboutNotch8 .weStriveFor, #index #aboutNotch8 #services .weStriveFor, #services #posts .description, #posts #services .description {
+.dropshadow_orange, #services .well, #services #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 #services .weBelieveIn, #services #index #aboutNotch8 .weStriveFor, #index #aboutNotch8 #services .weStriveFor, #services #posts .description, #posts #services .description, #speaking #conferences, #speaking #presentations {
   box-shadow: 6px 6px 5px #c46b0c; }
+
+.white_content_container, #portfolio, #speaking #conferences, #speaking #presentations {
+  background-color: white;
+  margin: 10px;
+  padding: 10px; }
 
 #topNav {
   padding: 20px 0; }
@@ -6576,11 +6581,6 @@ a.badge:focus {
     font-size: 1.6em; }
     #posts h3 a {
       color: black; }
-
-#portfolio {
-  background-color: white;
-  margin: 10px;
-  padding: 10px; }
 
 body {
   font-family: 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif; }

@@ -6531,7 +6531,10 @@ a.badge:focus {
   /* IE6-9 */ }
 
 .dropshadow, #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 .weStriveFor {
-  box-shadow: 10px 10px 5px #888888; }
+  box-shadow: 6px 6px 5px #888888; }
+
+.dropshadow_orange, #services .well, #services #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 #services .weBelieveIn, #services #index #aboutNotch8 .weStriveFor, #index #aboutNotch8 #services .weStriveFor, #services #posts .description, #posts #services .description {
+  box-shadow: 6px 6px 5px #c46b0c; }
 
 #topNav {
   padding: 20px 0; }

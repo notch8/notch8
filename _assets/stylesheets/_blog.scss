@@ -1,0 +1,13 @@
+#posts{
+  padding-top: 10px;
+  h3{
+    font-size: 1.6em;
+    a{
+      color: black;
+    }
+  }
+
+  .description{
+    @extend .well;
+  }
+}

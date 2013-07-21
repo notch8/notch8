@@ -4195,14 +4195,14 @@ a [class*=" icon-"] {
   z-index: 1051;
   margin-top: 2px; }
 
-.well, #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 .weStriveFor {
+.well, #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 .weStriveFor, #posts .description {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
   background-color: #f5f5f5;
   border: 1px solid #e3e3e3; }
 
-.well blockquote, #index #aboutNotch8 .weBelieveIn blockquote, #index #aboutNotch8 .weStriveFor blockquote {
+.well blockquote, #index #aboutNotch8 .weBelieveIn blockquote, #index #aboutNotch8 .weStriveFor blockquote, #posts .description blockquote {
   border-color: #ddd;
   border-color: rgba(0, 0, 0, 0.15); }
 
@@ -6566,6 +6566,13 @@ a.badge:focus {
     border-top: 3px solid black; }
   #index #aboutNotch8 h3 {
     margin: 0px; }
+
+#posts {
+  padding-top: 10px; }
+  #posts h3 {
+    font-size: 1.6em; }
+    #posts h3 a {
+      color: black; }
 
 body {
   font-family: 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif; }

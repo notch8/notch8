@@ -41,6 +41,9 @@ GEM
       posix-spawn (~> 0.3.6)
       yajl-ruby (~> 1.1.0)
     rack (1.5.2)
+    rack-jekyll (0.4.1)
+      jekyll (>= 0.12.0, < 2.0)
+      rack (~> 1.5.0)
     safe_yaml (0.7.1)
     sass (3.2.9)
     simplegem (1.0.0)
@@ -62,4 +65,5 @@ DEPENDENCIES
   jekyll-haml
   jekyll-sass
   maruku
+  rack-jekyll
   simplegem

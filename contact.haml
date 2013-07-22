@@ -1,56 +1,54 @@
 ---
 layout: main
 title: Contact
+contacts:
+  - name: Rob Kaufman
+    title: Partner and Founder
+    email_text: rob-AT-notch8.com
+    email: rob@notch8.com
+    from: San Diego, CA
+    image: rob.jpg
+    webcall_id: e1649b705beb4bd795eb8e05e59043df4bc13741
+  - name: Matt Clark
+    title: Partner
+    email: matt@notch8.com
+    email_text: matt-AT-notch8.com
+    from: Portland, OR
+    image: matt.jpg
+  - name: Lindsay Dayton LaShell
+    title: Account Manager
+    email: lindsay@notch8.com
+    email_text: lindsay-AT-notch8.com
+    from: San Diego, CA
+    image: lindsay.jpg
 ---
-.contact
-  .left
-    %img{:src => "/images/rob.jpg"}/
-  .left.address
-    %div
-      %b
-        %a{:href => "mailto:rob@notch8"}
-          Rob Kaufman
-    %div
-      Partner and Founder
-    %div
-      rob-AT-notch8.com
-    %div
-      San Diego, CA
-    %div
-
-  .right
-    %object{:data => "https://clients4.google.com/voice/embed/webCallButton", :height => "85", :type => "application/x-shockwave-flash", :width => "230"}
-      %param{:name => "movie", :value => "https://clients4.google.com/voice/embed/webCallButton"}/
-      %param{:name => "wmode", :value => "transparent"}/
-      %param{:name => "FlashVars", :value => "id=e1649b705beb4bd795eb8e05e59043df4bc13741&style=0"}/
-.contact
-  .left
-    %img{:src => "/images/matt.jpg"}
-  .left.address
-    %div
-      %b
-        %a{:href => "mailto:matt@notch8"}
-          Matt Clark
-    %div
-      Partner
-    %div
-      matt-AT-notch8.com
-    %div
-      Portland, OR
-.contact
-  .left
-    %img{:src=>'/images/lindsay.jpg'}
-  .left.address
-    %div
-      %b
-        %a{:href => "mailto:lindsay@notch8"}
-          Lindsay Dayton LaShell
-    %div
-      Account Manager
-    %div
-      lindsay-AT-notch8.com
-
-    %div
-      San Diego, CA
-
-
+#contacts
+  {% for contact in page.contacts %}
+  .contact.row
+    .span6.offset2
+      .well
+        .row
+          .span2
+            %img{:src => "{{ contact.image | asset_path}}"}
+          .span3
+            %div
+              %b
+                %a{:href => "mailto:{{contact.email}}"}
+                  {{contact.name}} 
+            %div
+              {{contact.title}}
+            %div
+              {{contact.email_text}}
+            %div
+              {{contact.from}}
+            %div
+    {% if contact.webcall_id %}
+    .span4
+      %object{:data => "https://clients4.google.com/voice/embed/webCallButton", :height => "85", :type => "application/x-shockwave-flash", :width => "230"}
+        %param{:name => "movie", :value => "https://clients4.google.com/voice/embed/webCallButton"}/
+        %param{:name => "wmode", :value => "transparent"}/
+        %param{:name => "FlashVars", :value => "id={{contact.webcall_id}}&style=0"}/
+    {% endif %}
+  {% endfor %}
+  .row
+    .span2.offset1

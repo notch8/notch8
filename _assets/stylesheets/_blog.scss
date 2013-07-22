@@ -9,5 +9,6 @@
 
   .description{
     @extend .well;
+    @extend .dropshadow_orange;
   }
 }

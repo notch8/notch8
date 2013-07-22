@@ -43,23 +43,7 @@
       %h2
         %a{:href => "{{ post.url }}"} {{ page.title }}
       {{ content }}
-    #disqus_thread
-    :javascript
-      var disqus_url = "http://notch8.com/{{ page.url }}";
-      var disqus_title ="{{ page.title }}";
-      var disqus_identifier = "{{ page.url }}";
-      var disqus_developer = 1;
-      (function() {
-       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-       dsq.src = 'http://notch8.disqus.com/embed.js';
-       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-        %noscript
-      Please enable JavaScript to view the
-      %a{:href => "http://disqus.com/?ref_noscript=notch8"} comments powered by Disqus.
-    %a.dsq-brlink{:href => "http://disqus.com"}
-      blog comments powered by
-      %span.logo-disqus Disqus
+
   .white_box
     copyright © 2013 Notch8 and licensed under the
     %a{:href => "http://creativecommons.org/licenses/by-sa/3.0/us/"} creative commons attribution-share alike license

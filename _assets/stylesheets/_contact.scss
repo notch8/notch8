@@ -1,0 +1,11 @@
+#contacts{
+  .contact:first-child{
+    padding-top: 40px;
+  }
+  .contact{
+    margin-bottom: 20px;
+    .well{
+      @extend .dropshadow_orange;
+    }
+  }
+}

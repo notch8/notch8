@@ -6533,7 +6533,7 @@ a.badge:focus {
 .dropshadow, #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 .weStriveFor {
   box-shadow: 6px 6px 5px #888888; }
 
-.dropshadow_orange, #services .well, #services #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 #services .weBelieveIn, #services #index #aboutNotch8 .weStriveFor, #index #aboutNotch8 #services .weStriveFor, #services #posts .description, #posts #services .description, #speaking #conferences, #speaking #presentations {
+.dropshadow_orange, #posts .description, #services .well, #services #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 #services .weBelieveIn, #services #index #aboutNotch8 .weStriveFor, #index #aboutNotch8 #services .weStriveFor, #contacts .contact .well, #contacts .contact #index #aboutNotch8 .weBelieveIn, #index #aboutNotch8 #contacts .contact .weBelieveIn, #contacts .contact #index #aboutNotch8 .weStriveFor, #index #aboutNotch8 #contacts .contact .weStriveFor {
   box-shadow: 6px 6px 5px #c46b0c; }
 
 .white_content_container, #portfolio, #speaking #conferences, #speaking #presentations {
@@ -6582,5 +6582,14 @@ a.badge:focus {
     #posts h3 a {
       color: black; }
 
+#contacts .contact:first-child {
+  padding-top: 40px; }
+#contacts .contact {
+  margin-bottom: 20px; }
+
 body {
   font-family: 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif; }
+  body #topNav .row, body #mainContent .row {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto; }

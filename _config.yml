@@ -2,7 +2,7 @@ destination: ./_site
 port: 4000
 pygments: true
 markdown: maruku
-exclude: ["Gemfile", "Gemfile.lock", ".rvmrc"]
+exclude: ["Gemfile", "Gemfile.lock", ".rvmrc", "vendor"]
 permalink: date
 maruku:
   use_tex: false
